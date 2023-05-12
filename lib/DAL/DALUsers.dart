@@ -10,27 +10,19 @@ class DALUsers extends GetxController {
 
 
   Future<void> FncBatchInsert() async {
-
-
-
     final Database? l_Database = await DBHelper().FncGetDatabase();
     if (l_Database== null) return;
     print(l_Database);
-
     Batch batch = l_Database.batch();
-
     final List<Map<String, dynamic>>? l_map = await VmUserData().FncGetUserMapList();
-
-    List<Map<String, dynamic>>? json = l_map;// your list of objects
+    List<Map<String, dynamic>>? json = l_map;
 
     for (Map<String, dynamic> l_map in json!) {
       String? l_InsertionQuery = await CRUDUsers().FncInsertion(json);
       if (l_InsertionQuery != null) {
-        // Execute the query in the batch
         batch.execute(l_InsertionQuery);
       }
     }
-
     try {
       await batch.commit();
     } catch (e) {
@@ -38,16 +30,12 @@ class DALUsers extends GetxController {
     }
   }
 
-
   Future<List<ModUserDB>> FncFetchUsers() async {
-
     final Database? l_Database = await DBHelper().FncGetDatabase();
-
     if (l_Database == null) return [];
-
     List<Map<String, dynamic>> result = await l_Database!.query('TBU_Users');
-
     List<ModUserDB> users = [];
+
     for (Map<String, dynamic> row in result) {
       ModUserDB user = ModUserDB();
       user.Pr_Fname = row['Fname'];
@@ -57,7 +45,6 @@ class DALUsers extends GetxController {
       user.Pr_Address = row['Address'];
       users.add(user);
     }
-
     return users;
   }
 }

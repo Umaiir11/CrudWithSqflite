@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:localapp/MVVM/View/VwArea.dart';
 
 import 'MVVM/View/VwUserData.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const VwUserData(),
+      home: const VwAreaData(),
     );
   }
 }

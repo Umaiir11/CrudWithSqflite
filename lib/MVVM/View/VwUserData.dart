@@ -6,9 +6,9 @@ import 'package:localapp/MVVM/ViewModel/VmUserData.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../ClassModules/DBHelperClass.dart';
-import '../../DAL/DAL.dart';
+import '../../DAL/DALUsers.dart';
 import '../../Validation/DVMUser.dart';
-import 'VwDBData.dart';
+import 'VwUserDBData.dart';
 
 class VwUserData extends StatefulWidget {
   const VwUserData({Key? key}) : super(key: key);
@@ -102,7 +102,7 @@ class _VwUserDataState extends State<VwUserData> {
                               Tuple2<List<String>?, List<String>?> errors = DVMUser.Fnc_Validate(l_ModUserDB);
                               if (errors.item2 != null && errors.item2!.contains('Pr_Fname')) {
                                 return errors
-                                    .item1![errors.item2!.indexOf('Pr_Fname')]; // Return the error message for Pr_FullName
+                                    .item1![errors.item2!.indexOf('Pr_Fname')];
                               }
 
                               return null;
@@ -119,8 +119,6 @@ class _VwUserDataState extends State<VwUserData> {
                       child: SizedBox(
                           width: PrWidth * .890,
                           child: TextFormField(
-                              //obscureText: !l_VmLogin.Pr_boolSecurePassword_wid.value,
-                              // controller: passswordController,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey[100],
@@ -128,7 +126,7 @@ class _VwUserDataState extends State<VwUserData> {
                                 hintStyle: const TextStyle(color: Colors.black38),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
-                                //suffixIcon: togglepassword(),
+
                               ),
                               validator: (value) {
                                 l_ModUserDB.Pr_Lname = value ?? '';
@@ -151,8 +149,7 @@ class _VwUserDataState extends State<VwUserData> {
                       child: SizedBox(
                           width: PrWidth * .890,
                           child: TextFormField(
-                              //obscureText: !l_VmLogin.Pr_boolSecurePassword_wid.value,
-                              // controller: passswordController,
+
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey[100],
@@ -160,7 +157,7 @@ class _VwUserDataState extends State<VwUserData> {
                                 hintStyle: const TextStyle(color: Colors.black38),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
-                                //suffixIcon: togglepassword(),
+
                               ),
                               validator: (value) {
                                 l_ModUserDB.Pr_EmailID = value ?? '';
@@ -183,8 +180,7 @@ class _VwUserDataState extends State<VwUserData> {
                       child: SizedBox(
                           width: PrWidth * .890,
                           child: TextFormField(
-                              //obscureText: !l_VmLogin.Pr_boolSecurePassword_wid.value,
-                              // controller: passswordController,
+
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey[100],
@@ -192,7 +188,7 @@ class _VwUserDataState extends State<VwUserData> {
                                 hintStyle: const TextStyle(color: Colors.black38),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
-                                //suffixIcon: togglepassword(),
+
                               ),
                               validator: (value) {
                                 l_ModUserDB.Pr_CompanyID = value ?? '';
@@ -215,8 +211,7 @@ class _VwUserDataState extends State<VwUserData> {
                       child: SizedBox(
                           width: PrWidth * .890,
                           child: TextFormField(
-                              //obscureText: !l_VmLogin.Pr_boolSecurePassword_wid.value,
-                              // controller: passswordController,
+
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey[100],
@@ -224,7 +219,7 @@ class _VwUserDataState extends State<VwUserData> {
                                 hintStyle: const TextStyle(color: Colors.black38),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
-                                //suffixIcon: togglepassword(),
+
                               ),
                               validator: (value) {
                                 l_ModUserDB.Pr_Address = value ?? '';
@@ -255,8 +250,6 @@ class _VwUserDataState extends State<VwUserData> {
                                 backgroundColor: Colors.cyan),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-
-
                                 l_VmUserData.lModUserDBList.clear();
 
                                 l_VmUserData.DB_DataList.clear(); // Clear the list before adding new data
@@ -266,9 +259,9 @@ class _VwUserDataState extends State<VwUserData> {
                                   await l_DBHelper.FncCreateDataBase();
                                   await l_DAL.FncBatchInsert();
                                   l_VmUserData.DB_DataList = await l_DAL.FncFetchUsers();
-                                  if(l_VmUserData.DB_DataList != null){
-                                    Get.to(() => Vw_DBData());                                  }
-                                  else{
+                                  if (l_VmUserData.DB_DataList != null) {
+                                    Get.to(() => Vw_DBData());
+                                  } else {
                                     print("Fail");
                                   }
 

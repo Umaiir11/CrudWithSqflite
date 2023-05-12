@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:uuid/uuid.dart';
 
 import '../Model/DB/ModUserDB.dart';
 
@@ -64,9 +65,11 @@ class VmUserData extends GetxController{
   List<ModUserDB> lModUserDBList = [];
   static List<Map<String, dynamic>> l_map = [];
   FncFillModel() {
-    //String uuid = const Uuid().v4();
+
+    String uuid = const Uuid().v4();
 
     ModUserDB lModUserDB = ModUserDB();
+    lModUserDB.Pr_PKGUID = uuid;
     lModUserDB.Pr_Fname = Pr_txtFname_Text;
     lModUserDB.Pr_Lname = Pr_txtLname_Text;
     lModUserDB.Pr_EmailID = Pr_txtEmailID_Text;

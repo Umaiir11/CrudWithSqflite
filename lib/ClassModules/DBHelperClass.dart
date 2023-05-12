@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:localapp/DAL/DAL.dart';
+import 'package:localapp/DAL/DALUsers.dart';
 import 'package:localapp/DAL/DALSchemaQuires.dart';
+import 'package:localapp/SchemaQuries/TBU_Area.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -22,9 +23,9 @@ class DBHelper extends GetxController {
 
   Future<void> FncCreateDataBase() async {
     final appDirectory = await getApplicationDocumentsDirectory();
-    final dbDirectory = Directory('${appDirectory.path}/AIsoneSys');
+    final dbDirectory = Directory('${appDirectory.path}/APP_DB');
     await dbDirectory.create(recursive: true);
-    final dbPath = path.join(dbDirectory.path, 'DB1.db');
+    final dbPath = path.join(dbDirectory.path, 'AreaDB.db');
 
     final databaseExists = await databaseFactory.databaseExists(dbPath);
     if (databaseExists) {
@@ -40,7 +41,9 @@ class DBHelper extends GetxController {
         },
       );
       // Execute the batch of queries on the newly created database connection.
-      await DALSchemaQuries().FncSchemaQuries(dbPath, TBU_User().G_Queries);
+
+      //await DALSchemaQuries().FncSchemaQuries(dbPath, TBU_User().G_Queries);
+      await DALSchemaQuries().FncSchemaQuries(dbPath, TBU_AREA().G_Queries);
     }
   }
 
