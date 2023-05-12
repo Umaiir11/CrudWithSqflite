@@ -1,0 +1,90 @@
+import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
+import '../Model/DB/ModUserDB.dart';
+
+class VmUserData extends GetxController{
+
+  List<ModUserDB> DB_DataList = [];
+
+  RxBool l_autoValidate = false.obs;
+
+
+  RxString l_PrFName = ''.obs;
+
+  String get Pr_txtFname_Text {
+    return l_PrFName.value;
+  }
+
+  set Pr_txtFname_Text(String value) {
+    l_PrFName.value = value;
+  }
+
+  RxString l_PrLName = ''.obs;
+
+  String get Pr_txtLname_Text {
+    return l_PrLName.value;
+  }
+
+  set Pr_txtLname_Text(String value) {
+    l_PrLName.value = value;
+  }
+
+
+  RxString l_PrEmailID = ''.obs;
+
+  String get Pr_txtEmailID_Text {
+    return l_PrEmailID.value;
+  }
+
+  set Pr_txtEmailID_Text(String value) {
+    l_PrEmailID.value = value;
+  }
+
+  RxString l_PrCompanyID = ''.obs;
+
+  String get Pr_txtCompanyID_Text {
+    return l_PrCompanyID.value;
+  }
+
+  set Pr_txtCompanyID_Text(String value) {
+    l_PrCompanyID.value = value;
+  }
+
+  RxString l_PrAddress = ''.obs;
+
+  String get Pr_txtAddress_Text {
+    return l_PrAddress.value;
+  }
+
+  set Pr_txtAddress_Text(String value) {
+    l_PrAddress.value = value;
+  }
+
+  List<ModUserDB> lModUserDBList = [];
+  static List<Map<String, dynamic>> l_map = [];
+  FncFillModel() {
+    //String uuid = const Uuid().v4();
+
+    ModUserDB lModUserDB = ModUserDB();
+    lModUserDB.Pr_Fname = Pr_txtFname_Text;
+    lModUserDB.Pr_Lname = Pr_txtLname_Text;
+    lModUserDB.Pr_EmailID = Pr_txtEmailID_Text;
+    lModUserDB.Pr_CompanyID = Pr_txtCompanyID_Text;
+    lModUserDB.Pr_Address = Pr_txtAddress_Text;
+    lModUserDBList.add(lModUserDB);
+
+    for (ModUserDB user in lModUserDBList) {
+      l_map.add(user.UserToJson());
+    }
+
+  }
+  List<Map<String, dynamic>>? FncGetUserMapList() {
+    if (l_map.isNotEmpty) {
+      return l_map;
+    } else {
+      return null;
+    }
+  }
+
+}
