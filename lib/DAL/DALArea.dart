@@ -51,14 +51,14 @@ class DALArea extends GetxController {
 
 
 
-  Future<List<ModAreaDB>> FncFetchUsers() async {
+  Future<List<TBU_Area>> FncFetchUsers() async {
     final Database? l_Database = await DBHelper().FncGetDatabase();
     if (l_Database == null) return [];
     List<Map<String, dynamic>> result = await l_Database!.query('TBU_Area');
-    List<ModAreaDB> l_ListModArea = [];
+    List<TBU_Area> l_ListModArea = [];
 
     for (Map<String, dynamic> row in result) {
-      ModAreaDB l_ModAreaDB = ModAreaDB();
+      TBU_Area l_ModAreaDB = TBU_Area();
 
       l_ModAreaDB.Pr_PKGUID = row['PKGUID'];
       l_ModAreaDB.Pr_AreaID = row['AreaID'];

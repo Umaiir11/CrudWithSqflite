@@ -4,7 +4,7 @@ import 'package:tuple/tuple.dart';
 import '../MVVM/Model/DB/ModUserDB.dart';
 
 class DVMArea {
-  static Tuple2<List<String>?, List<String>?> Fnc_Validate(ModAreaDB lModAreaDB) {
+  static Tuple2<List<String>?, List<String>?> Fnc_Validate(TBU_Area lModAreaDB) {
     List<String>? lErrorMsgs = [];
     List<String>? lFieldNames = [];
 

@@ -1,4 +1,4 @@
-class ModAreaDB {
+class TBU_Area {
   String? Pr_PKGUID;
   int? Pr_SrNo;
   String? Pr_AreaID;

@@ -3,8 +3,8 @@ import 'package:localapp/MVVM/Model/DB/ModAreaUserDB.dart';
 import 'package:uuid/uuid.dart';
 
 class VmAreaData extends GetxController {
-  List<ModAreaDB> DB_DataList = [];
-  RxList OBSList = <ModAreaDB>[].obs;
+  List<TBU_Area> DB_DataList = [];
+  RxList OBSList = <TBU_Area>[].obs;
   RxBool l_autoValidate = false.obs;
 
   RxString l_PrAreaID = ''.obs;
@@ -27,13 +27,13 @@ class VmAreaData extends GetxController {
     l_Pr_Desc.value = value;
   }
 
-  List<ModAreaDB> lModAreaDBList = [];
+  List<TBU_Area> lModAreaDBList = [];
   static List<Map<String, dynamic>> l_map = [];
 
   FncFillModel() {
     String uuid = const Uuid().v4();
     DateTime l_DateTime = DateTime.parse("2022-08-13T13:49:44");
-    ModAreaDB l_ModAreaDB = ModAreaDB();
+    TBU_Area l_ModAreaDB = TBU_Area();
     l_ModAreaDB.Pr_PKGUID = uuid;
     l_ModAreaDB.Pr_AreaID = Pr_txtareaid_Text;
     l_ModAreaDB.Pr_Descr = Pr_txtLdescription_Text;
@@ -49,7 +49,7 @@ class VmAreaData extends GetxController {
     l_ModAreaDB.Pr_Operation = 1;
     lModAreaDBList.add(l_ModAreaDB);
 
-    for (ModAreaDB item in lModAreaDBList) {
+    for (TBU_Area item in lModAreaDBList) {
       l_map.add(item.FncAreaToJson());
     }
   }

@@ -22,7 +22,7 @@ class _VwAreaDataState extends State<VwAreaData> {
   final VmAreaData l_VmAreaData = Get.put(VmAreaData());
   final DALArea l_DAL = Get.put(DALArea());
   final DBHelper l_DBHelper = Get.put(DBHelper());
-  ModAreaDB l_ModAreaDB = ModAreaDB();
+  TBU_Area l_ModAreaDB = TBU_Area();
 
   final TextEditingController l_Pr_FnameController = TextEditingController();
   final TextEditingController l_Pr_LnameController = TextEditingController();
