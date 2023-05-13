@@ -31,6 +31,26 @@ class DALArea extends GetxController {
     }
   }
 
+
+  Future<void> FncBatchUpdate(String l_ColumnName, String l_ColumnValue, String l_WhereClause) async {
+    final Database? l_Database = await DBHelper().FncGetDatabase();
+    if (l_Database == null) return;
+
+    Batch batch = l_Database.batch();
+
+    String? l_UpdateQuery = await CRUDUsers().FncUpdate( l_WhereClause, l_ColumnName, l_ColumnValue);
+      if (l_UpdateQuery != null) {
+        batch.execute(l_UpdateQuery);
+    }
+    try {
+      await batch.commit();
+    } catch (e) {
+      print('An error occurred while executing the batch: $e');
+    }
+  }
+
+
+
   Future<List<ModAreaDB>> FncFetchUsers() async {
     final Database? l_Database = await DBHelper().FncGetDatabase();
     if (l_Database == null) return [];
@@ -40,7 +60,7 @@ class DALArea extends GetxController {
     for (Map<String, dynamic> row in result) {
       ModAreaDB l_ModAreaDB = ModAreaDB();
 
-      l_ModAreaDB.Pr_PKGUID = row['PKGUID '];
+      l_ModAreaDB.Pr_PKGUID = row['PKGUID'];
       l_ModAreaDB.Pr_AreaID = row['AreaID'];
       l_ModAreaDB.Pr_Descr = row['Descr'];
       l_ModAreaDB.Pr_SrNo = row['SrNo'];

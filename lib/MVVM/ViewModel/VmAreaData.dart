@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class VmAreaData extends GetxController {
   List<ModAreaDB> DB_DataList = [];
-
+  RxList OBSList = <ModAreaDB>[].obs;
   RxBool l_autoValidate = false.obs;
 
   RxString l_PrAreaID = ''.obs;
@@ -41,7 +41,7 @@ class VmAreaData extends GetxController {
     l_ModAreaDB.Pr_Abbreviation = "xyz";
     l_ModAreaDB.Pr_CB = "xyz";
     l_ModAreaDB.Pr_CDate = l_DateTime;
-    l_ModAreaDB.Pr_MB =  "xyz";
+    l_ModAreaDB.Pr_MB = "xyz";
     l_ModAreaDB.Pr_MDate = l_DateTime;
     l_ModAreaDB.Pr_DB = "xyz";
     l_ModAreaDB.Pr_DDate = l_DateTime;
@@ -60,5 +60,14 @@ class VmAreaData extends GetxController {
     } else {
       return null;
     }
+  }
+
+  FncClearData() {
+    DB_DataList.clear();
+    OBSList.clear();
+    lModAreaDBList.clear();
+    l_map.clear();
+    l_Pr_Desc.value = '';
+    l_PrAreaID.value = '';
   }
 }

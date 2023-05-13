@@ -3,15 +3,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:localapp/DAL/DALArea.dart';
 import 'package:localapp/MVVM/Model/DB/ModAreaUserDB.dart';
-
 import 'package:localapp/Validation/DVMArea.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../ClassModules/DBHelperClass.dart';
-import '../../DAL/DALUsers.dart';
 import '../ViewModel/VmAreaData.dart';
 import 'VwAreaDBData.dart';
-import 'VwUserDBData.dart';
 
 class VwAreaData extends StatefulWidget {
   const VwAreaData({Key? key}) : super(key: key);
@@ -29,7 +26,6 @@ class _VwAreaDataState extends State<VwAreaData> {
 
   final TextEditingController l_Pr_FnameController = TextEditingController();
   final TextEditingController l_Pr_LnameController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +83,7 @@ class _VwAreaDataState extends State<VwAreaData> {
                       child: SizedBox(
                         width: PrWidth * .890,
                         child: TextFormField(
-                          //controller: EmailController,
+                            //controller: EmailController,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.grey[100],
@@ -100,8 +96,7 @@ class _VwAreaDataState extends State<VwAreaData> {
                               l_ModAreaDB.Pr_AreaID = value ?? '';
                               Tuple2<List<String>?, List<String>?> errors = DVMArea.Fnc_Validate(l_ModAreaDB);
                               if (errors.item2 != null && errors.item2!.contains('Pr_AreaID')) {
-                                return errors
-                                    .item1![errors.item2!.indexOf('Pr_AreaID')];
+                                return errors.item1![errors.item2!.indexOf('Pr_AreaID')];
                               }
 
                               return null;
@@ -125,14 +120,12 @@ class _VwAreaDataState extends State<VwAreaData> {
                                 hintStyle: const TextStyle(color: Colors.black38),
                                 floatingLabelBehavior: FloatingLabelBehavior.always,
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide.none),
-
                               ),
                               validator: (value) {
                                 l_ModAreaDB.Pr_Descr = value ?? '';
                                 Tuple2<List<String>?, List<String>?> errors = DVMArea.Fnc_Validate(l_ModAreaDB);
                                 if (errors.item2 != null && errors.item2!.contains('Pr_Descr')) {
-                                  return errors
-                                      .item1![errors.item2!.indexOf('Pr_Descr')];
+                                  return errors.item1![errors.item2!.indexOf('Pr_Descr')];
                                 }
 
                                 return null;
@@ -157,15 +150,21 @@ class _VwAreaDataState extends State<VwAreaData> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 l_VmAreaData.lModAreaDBList.clear();
-
+                                l_VmAreaData.OBSList.clear();
                                 l_VmAreaData.DB_DataList.clear(); // Clear the list before adding new data
                                 l_VmAreaData.FncFillModel();
+
+                                l_Pr_FnameController.clear();
+                                l_Pr_LnameController.clear();
 
                                 if (l_VmAreaData.lModAreaDBList.isNotEmpty) {
                                   await l_DBHelper.FncCreateDataBase();
                                   await l_DAL.FncBatchInsert();
+
                                   l_VmAreaData.DB_DataList = await l_DAL.FncFetchUsers();
+
                                   if (l_VmAreaData.DB_DataList != null) {
+                                    l_VmAreaData.OBSList.addAll(l_VmAreaData.DB_DataList);
                                     Get.to(() => Vw_AreaDBData());
                                   } else {
                                     print("Fail");
