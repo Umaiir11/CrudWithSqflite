@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:localapp/DAL/DALArea.dart';
 import 'package:localapp/MVVM/Model/DB/ModAreaUserDB.dart';
 import 'package:localapp/Validation/DVMArea.dart';
@@ -67,14 +66,6 @@ class _VwAreaDataState extends State<VwAreaData> {
                     child: Text(
                       "Please enter your information",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.ubuntu(
-                        textStyle: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black26,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
                     ),
                   ),
                   Padding(
@@ -180,12 +171,6 @@ class _VwAreaDataState extends State<VwAreaData> {
                             },
                             child: Text(
                               "Add",
-                              style: GoogleFonts.ubuntu(
-                                  textStyle: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                      //fontWeight: FontWeight.w600,
-                                      letterSpacing: .5)),
                             ),
                           )),
                     ),
